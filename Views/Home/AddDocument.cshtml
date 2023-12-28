@@ -1,0 +1,40 @@
+﻿@model AddDocumentViewModel
+
+@{
+    ViewData["Title"] = "Add Document";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Home" asp-action="AddDocument" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="TopicId">Select Topic:</label>
+        @Html.DropDownListFor(model => model.TopicId, (IEnumerable<SelectListItem>)ViewBag.TopicId, "Select Topic", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TopicId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="PolicyId">Select Policy:</label>
+        @Html.DropDownListFor(model => model.PolicyId, (IEnumerable<SelectListItem>)ViewBag.PolicyId, "Select Policy", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PolicyId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="DocumentCaption">Document Caption:</label>
+        <input type="text" asp-for="DocumentCaption" class="form-control" />
+        @Html.ValidationMessageFor(model => model.DocumentCaption, "", new { @class = "text-danger" })
+    </div>
+
+    <<div class="form-group">
+        <label for="File">Choose File:</label>
+        <input type="file" asp-for="File" class="form-control" />
+        @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
